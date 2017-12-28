@@ -2,8 +2,8 @@
   "name": "image2braille",
   "version": "0.1.1",
   "description": "Utility allowing for encoding images in Braille glyphs",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/lib/index.js",
+  "types": "dist/lib/index.d.ts",
   "scripts": {
     "clean": "rimraf dist",
     "prepublish": "npm run all",
