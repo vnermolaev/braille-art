@@ -1,0 +1,18 @@
+
+import { image2braille, Braille } from './lib/braille';
+import { createWriteStream } from 'fs';
+
+const settings = {
+    white_cutoff: 0.5,
+    whitespace: [[0, 0], [0, 0], [0, 0], [0, 1]] as Braille
+};
+
+image2string('./shapes.png', settings).then(strimage => {
+    const out = createWriteStream('text.txt');
+    for (const line of strimage) {
+        out.write(`${line.join('').trimRight()}\n`);
+    }
+    out.end();
+}).catch(err => {
+    console.log(`Cannot handle the request due to:\n${err}`);
+});

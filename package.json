@@ -1,0 +1,45 @@
+{
+  "name": "image2braille",
+  "version": "0.1.0",
+  "description": "Utility allowing for encoding images in Braille glyphs",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "clean": "rimraf dist",
+    "prepublish": "npm run all",
+    "build": "npm run clean && tsc && copyfiles test/shapes.png dist",
+    "test": "ava",
+    "all": "npm run build && npm run test"
+  },
+  "ava": {
+    "files": [
+      "dist/test/**/*_test.js"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/quicky84/image2braille.git"
+  },
+  "homepage": "https://github.com/quicky84/image2braille.git#readme",
+  "keywords": [
+    "image",
+    "img",
+    "braille",
+    "convert"
+  ],
+  "author": "Victor Ermolaev",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^8.5.2",
+    "ava": "^0.24.0",
+    "copyfiles": "^1.2.0",
+    "rimraf": "^2.6.2",
+    "ts-node": "^4.1.0",
+    "tslint": "^5.8.0",
+    "tslint-eslint-rules": "^4.1.1",
+    "typescript": "^2.6.2"
+  },
+  "dependencies": {
+    "jimp": "^0.2.28"
+  }
+}
