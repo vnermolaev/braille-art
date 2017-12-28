@@ -1,6 +1,6 @@
 {
-  "name": "image2braille",
-  "version": "0.1.2",
+  "name": "braille-art",
+  "version": "0.1.0",
   "description": "Utility allowing for encoding images in Braille glyphs",
   "main": "dist/lib/index.js",
   "types": "dist/lib/index.d.ts",
@@ -18,9 +18,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/quicky84/image2braille.git"
+    "url": "https://github.com/quicky84/braille-art"
   },
-  "homepage": "https://github.com/quicky84/image2braille.git#readme",
+  "homepage": "https://github.com/quicky84/braille-art#readme",
   "keywords": [
     "image",
     "img",
