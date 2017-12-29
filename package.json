@@ -1,6 +1,6 @@
 {
   "name": "braille-art",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Utility allowing for encoding images in Braille glyphs",
   "main": "dist/lib/index.js",
   "types": "dist/lib/index.d.ts",
