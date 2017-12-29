@@ -19,7 +19,7 @@ npm install braille-art -S
 
 `image2braille` is a function accepting `2` parameters:
 - path to an image
-- settings object:
+- settings object of type `BrailleArtSettings`:
     - `white_cutoff: number` above this value a shade of gray will be represented as a dot,
     - `whitespace?: string | Braille`, specifies what symbol is used for whitespaces. This setting is important for non-monospace fonts. The default value is an empty Braille glyph, which is (most likely) as wide as a regular whitespace and narrower than other Braille glyphs. Therefore I recommend using some Braille character which will not spoil the overall picture
     - `scale?: number`, image rescaling,

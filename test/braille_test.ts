@@ -2,7 +2,7 @@ import test from 'ava';
 
 import { join as path_join } from 'path';
 
-import { Braille, braille2string, image2braille } from '../lib/braille/index';
+import { Braille, braille2string, image2braille, BrailleArtSettings } from '../lib/braille/index';
 
 
 test("Valid Braille code", t => {
@@ -84,9 +84,9 @@ test("Generate a Braille string from an image", async t => {
         ]
     ];
 
-    const settings = {
+    const settings: BrailleArtSettings = {
         white_cutoff: 0.5,
-        whitespace: [[0, 0], [0, 0], [0, 0], [0, 1]] as Braille
+        whitespace: [[0, 0], [0, 0], [0, 0], [0, 1]]
     };
 
     for (let [path, expected_lines] of matches) {

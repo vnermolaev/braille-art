@@ -19,14 +19,15 @@ export function braille2string(b: Braille): string {
     return String.fromCharCode(0x2800 + value);
 }
 
-export async function image2braille(
-    path: string, settings: {
-        white_cutoff: number,
-        whitespace?: string | Braille,
-        scale?: number,
-        width?: number,
-        height?: number
-    }): Promise<string[][]> {
+export interface BrailleArtSettings {
+    white_cutoff: number;
+    whitespace?: string | Braille;
+    scale?: number;
+    width?: number;
+    height?: number;
+}
+
+export async function image2braille(path: string, settings: BrailleArtSettings): Promise<string[][]> {
     const raised = function (value: number): zero_one {
         // 0xFFFFFF = (4294967295)_10
         return value / 4294967295 > settings.white_cutoff ? 0 : 1;
