@@ -1,4 +1,4 @@
-`image2braille` is a small nifty package allowing for encoding images to all-braille unicode representations.
+`braille-art` is a small nifty package allowing for encoding images to all-braille unicode representations.
 It makes use of [`jimp`](https://github.com/oliver-moran/jimp) and thus supports all image types that `jimp` does.
 
 ## Installation ##
