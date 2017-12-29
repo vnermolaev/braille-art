@@ -3,7 +3,7 @@ It makes use of [`jimp`](https://github.com/oliver-moran/jimp) and thus supports
 
 ## Installation ##
 ```
-npm install image2string -S
+npm install braille-art -S
 ```
 
 ## Members ##
