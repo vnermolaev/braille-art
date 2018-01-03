@@ -28,9 +28,11 @@ export interface BrailleArtSettings {
 }
 
 export async function image2braille(path: string, settings: BrailleArtSettings): Promise<string[][]> {
+    let _settings = Object.assign({}, settings);
+
     const raised = function (value: number): zero_one {
         // 0xFFFFFF = (4294967295)_10
-        return value / 4294967295 > settings.white_cutoff ? 0 : 1;
+        return value / 4294967295 > _settings.white_cutoff ? 0 : 1;
     };
     const non_empty = function (b: Braille): boolean {
         return (
@@ -41,11 +43,11 @@ export async function image2braille(path: string, settings: BrailleArtSettings):
         );
     };
 
-    if (!settings.whitespace) {
+    if (!_settings.whitespace) {
         // Define dafault space symbol
-        settings.whitespace = braille2string([[0, 0], [0, 0], [0, 0], [0, 0]]);
-    } else if (typeof settings.whitespace !== "string") {
-        settings.whitespace = braille2string(settings.whitespace! as Braille);
+        _settings.whitespace = braille2string([[0, 0], [0, 0], [0, 0], [0, 0]]);
+    } else if (typeof _settings.whitespace !== "string") {
+        _settings.whitespace = braille2string(_settings.whitespace! as Braille);
     }
 
     let [img, err] = await resolve(jimp.read(path));
@@ -56,14 +58,14 @@ export async function image2braille(path: string, settings: BrailleArtSettings):
     // img !== null, we have handled this case
     img = img!.grayscale();
 
-    if (settings.scale && settings.scale !== 1 && settings.scale !== 1.0) {
-        img = img.scale(settings.scale);
-    } else if (settings.width && settings.height) {
-        img = img.resize(settings.width, settings.height);
-    } else if (settings.width) {
-        img = img.resize(settings.width, jimp.AUTO);
-    } else if (settings.height) {
-        img = img.resize(jimp.AUTO, settings.height);
+    if (_settings.scale && _settings.scale !== 1 && _settings.scale !== 1.0) {
+        img = img.scale(_settings.scale);
+    } else if (_settings.width && _settings.height) {
+        img = img.resize(_settings.width, _settings.height);
+    } else if (_settings.width) {
+        img = img.resize(_settings.width, jimp.AUTO);
+    } else if (_settings.height) {
+        img = img.resize(jimp.AUTO, _settings.height);
     }
 
     let strimage: string[][] = [];
@@ -78,7 +80,7 @@ export async function image2braille(path: string, settings: BrailleArtSettings):
                 [raised(img.getPixelColor(x, y + 3)), raised(img.getPixelColor(x + 1, y + 3))]
             ];
 
-            const s: string = non_empty(b) ? braille2string(b) : settings.whitespace!;
+            const s: string = non_empty(b) ? braille2string(b) : _settings.whitespace!;
             line.push(s);
         }
         strimage.push(line);

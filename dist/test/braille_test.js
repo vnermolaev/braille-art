@@ -144,3 +144,18 @@ ava_1.default("Generate a Braille string from an image", function (t) { return _
         }
     });
 }); });
+ava_1.default("Settings are not altered by function call", function (t) { return __awaiter(_this, void 0, void 0, function () {
+    var path, settings, generated_lines;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                path = path_1.join(__dirname, 'shapes.png'), settings = { white_cutoff: 0.5 };
+                return [4 /*yield*/, index_1.image2braille(path, settings)];
+            case 1:
+                generated_lines = _a.sent();
+                t.is(Object.keys(settings).length, 1);
+                t.true("white_cutoff" in settings);
+                return [2 /*return*/];
+        }
+    });
+}); });

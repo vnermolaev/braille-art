@@ -98,3 +98,15 @@ test("Generate a Braille string from an image", async t => {
         }
     }
 });
+
+
+test("Settings are not altered by function call", async t => {
+    const
+        path = path_join(__dirname, 'shapes.png'),
+        settings: BrailleArtSettings = { white_cutoff: 0.5 };
+
+    const generated_lines = await image2braille(path, settings);
+
+    t.is(Object.keys(settings).length, 1);
+    t.true("white_cutoff" in settings);
+});

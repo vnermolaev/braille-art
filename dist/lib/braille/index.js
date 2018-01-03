@@ -48,13 +48,14 @@ function braille2string(b) {
 exports.braille2string = braille2string;
 function image2braille(path, settings) {
     return __awaiter(this, void 0, void 0, function () {
-        var raised, non_empty, _a, img, err, strimage, y, line, x, b, s;
+        var _settings, raised, non_empty, _a, img, err, strimage, y, line, x, b, s;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
+                    _settings = Object.assign({}, settings);
                     raised = function (value) {
                         // 0xFFFFFF = (4294967295)_10
-                        return value / 4294967295 > settings.white_cutoff ? 0 : 1;
+                        return value / 4294967295 > _settings.white_cutoff ? 0 : 1;
                     };
                     non_empty = function (b) {
                         return (b[0][0] !== 0 || b[0][1] !== 0 ||
@@ -62,12 +63,12 @@ function image2braille(path, settings) {
                             b[2][0] !== 0 || b[2][1] !== 0 ||
                             b[3][0] !== 0 || b[3][1] !== 0);
                     };
-                    if (!settings.whitespace) {
+                    if (!_settings.whitespace) {
                         // Define dafault space symbol
-                        settings.whitespace = braille2string([[0, 0], [0, 0], [0, 0], [0, 0]]);
+                        _settings.whitespace = braille2string([[0, 0], [0, 0], [0, 0], [0, 0]]);
                     }
-                    else if (typeof settings.whitespace !== "string") {
-                        settings.whitespace = braille2string(settings.whitespace);
+                    else if (typeof _settings.whitespace !== "string") {
+                        _settings.whitespace = braille2string(_settings.whitespace);
                     }
                     return [4 /*yield*/, resolve_1.default(jimp.read(path))];
                 case 1:
@@ -77,17 +78,17 @@ function image2braille(path, settings) {
                     }
                     // img !== null, we have handled this case
                     img = img.grayscale();
-                    if (settings.scale && settings.scale !== 1 && settings.scale !== 1.0) {
-                        img = img.scale(settings.scale);
+                    if (_settings.scale && _settings.scale !== 1 && _settings.scale !== 1.0) {
+                        img = img.scale(_settings.scale);
                     }
-                    else if (settings.width && settings.height) {
-                        img = img.resize(settings.width, settings.height);
+                    else if (_settings.width && _settings.height) {
+                        img = img.resize(_settings.width, _settings.height);
                     }
-                    else if (settings.width) {
-                        img = img.resize(settings.width, jimp.AUTO);
+                    else if (_settings.width) {
+                        img = img.resize(_settings.width, jimp.AUTO);
                     }
-                    else if (settings.height) {
-                        img = img.resize(jimp.AUTO, settings.height);
+                    else if (_settings.height) {
+                        img = img.resize(jimp.AUTO, _settings.height);
                     }
                     strimage = [];
                     for (y = 0; y < img.bitmap.height; y += 4) {
@@ -99,7 +100,7 @@ function image2braille(path, settings) {
                                 [raised(img.getPixelColor(x, y + 2)), raised(img.getPixelColor(x + 1, y + 2))],
                                 [raised(img.getPixelColor(x, y + 3)), raised(img.getPixelColor(x + 1, y + 3))]
                             ];
-                            s = non_empty(b) ? braille2string(b) : settings.whitespace;
+                            s = non_empty(b) ? braille2string(b) : _settings.whitespace;
                             line.push(s);
                         }
                         strimage.push(line);
